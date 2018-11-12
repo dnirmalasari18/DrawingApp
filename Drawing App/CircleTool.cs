@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Drawing;
 using System.Threading.Tasks;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Drawing_App
 {
-    class LineTool : Button, ITool
+    class CircleTool: Button, ITool
     {
         Point A;
         ICanvas canvas;
@@ -17,13 +17,13 @@ namespace Drawing_App
         public ITool GetTool() { return this; }
         public Control GetControl() { return this; }
 
-        public LineTool()
+        public CircleTool()
         {
             this.Size = new Size(46, 23);
-            this.Location = new Point(2, 0);
-            this.Text = "Line";
+            this.Location = new Point(2, 50);
+            this.Text = "Circle";
         }
-
+        
         protected override void OnMouseClick(MouseEventArgs e)
         {
             base.OnMouseClick(e);
@@ -38,13 +38,13 @@ namespace Drawing_App
 
         public void OnMouseUp(Point point)
         {
-            /*Line line = new Line();
-            line.From = this.A; line.To = point;*/
-            var line = new Line()
+            var circle= new Circle()
             {
-                From = this.A, To=point
+                From = this.A, To = point
             };
-            canvas.AddDrawingObject(line);
+
+            canvas.AddDrawingObject(circle);
         }
+
     }
 }

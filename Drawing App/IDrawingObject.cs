@@ -14,5 +14,7 @@ namespace Drawing_App
         void SwapX();
         void SwapY();
         void Draw(Graphics g, Pen p);
+        IDrawingObject Collide(Point X);
+        void Move(Point target);
     }
 }

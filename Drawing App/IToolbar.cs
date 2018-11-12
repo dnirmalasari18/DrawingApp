@@ -4,17 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Drawing;
-
 namespace Drawing_App
 {
-    interface ITool
+    interface IToolbar
     {
-        ITool GetTool();
+        IToolbar GetToolbar();
         Control GetControl();
-
-        ICanvas Canvas { get; set; }
-        void OnMouseDown(Point x);
-        void OnMouseUp(Point x);
+        void AddTool(Control control);
     }
 }

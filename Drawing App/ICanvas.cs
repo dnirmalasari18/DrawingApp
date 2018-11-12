@@ -15,6 +15,6 @@ namespace Drawing_App
         List<IDrawingObject> GetDrawingObject();
         void SetMode(int x);
         void AddDrawingObject(IDrawingObject DrawObject);
-        
+
     }
 }

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Drawing;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace Drawing_App
 {
-    class Line : IDrawingObject
+    class Square : IDrawingObject
     {
         Point a, b;
 
@@ -19,7 +19,7 @@ namespace Drawing_App
 
         public void Draw(Graphics graphics, Pen pen)
         {
-            graphics.DrawLine(pen, a, b);
+            graphics.DrawRectangle(pen, a.X, a.Y, b.X - a.X, b.Y - a.Y);
         }
 
         public IDrawingObject Collide(Point target)
@@ -39,6 +39,5 @@ namespace Drawing_App
             a.Y += target.Y;
             b.Y += target.Y;
         }
-
     }
 }

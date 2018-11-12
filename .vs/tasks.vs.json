@@ -1,0 +1,15 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskName": "task-ICanvas",
+      "appliesTo": "Drawing App/ICanvas.cs",
+      "type": "launch"
+    },
+    {
+      "taskName": "task-DefaultCanvas",
+      "appliesTo": "Drawing App/DefaultCanvas.cs",
+      "type": "launch"
+    }
+  ]
+}

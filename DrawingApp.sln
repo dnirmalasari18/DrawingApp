@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Drawing App", "Drawing App\Drawing App.csproj", "{E7D1649F-A941-473C-B6F9-DD8D0102B6D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawingApp", "Drawing App\DrawingApp.csproj", "{E7D1649F-A941-473C-B6F9-DD8D0102B6D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {FF9FA053-6132-465C-9C54-A8C1FD310C82}
+		SolutionGuid = {CF79350D-FAB8-4077-97D0-AFB0B66514EE}
 	EndGlobalSection
 EndGlobal
