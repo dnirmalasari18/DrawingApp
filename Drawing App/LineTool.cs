@@ -8,43 +8,54 @@ using System.Windows.Forms;
 
 namespace Drawing_App
 {
-    class LineTool : Button, ITool
+    class LineTool : ToolStripButton, ITool
     {
-        Point A;
         ICanvas canvas;
+        Line line;
 
-        public ICanvas Canvas { get { return this.canvas; } set { this.canvas = value; } }
-        public ITool GetTool() { return this; }
-        public Control GetControl() { return this; }
+        public ICanvas TargetCanvas { get { return this.canvas; } set { this.canvas = value; } }
 
         public LineTool()
         {
-            this.Size = new Size(46, 23);
-            this.Location = new Point(2, 0);
+            this.Name = "Line Tool";
             this.Text = "Line";
+            this.CheckOnClick = true;
         }
 
-        protected override void OnMouseClick(MouseEventArgs e)
+        public void OnMouseDown(object sender, MouseEventArgs e)
         {
-            base.OnMouseClick(e);
-            this.canvas.GetTool = this;
-            this.canvas.SetMode(DefaultCanvas.DrawMode);
-        }
-
-        public void OnMouseDown(Point point)
-        {
-            this.A = point;
-        }
-
-        public void OnMouseUp(Point point)
-        {
-            /*Line line = new Line();
-            line.From = this.A; line.To = point;*/
-            var line = new Line()
+            if (e.Button == MouseButtons.Left)
             {
-                From = this.A, To=point
-            };
-            canvas.AddDrawingObject(line);
+                line = new Line()
+                {
+                    From = e.Location,
+                    To = e.Location
+                };
+                this.canvas.AddDrawingObject(line);
+            }
+        }
+
+        public void OnMouseUp(object sender, MouseEventArgs e)
+        {
+            if (line != null)
+            {
+                line.Deselect();
+                line = null;
+            }
+        }
+
+        public void OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (line != null)
+            {
+                line.To = e.Location;
+            }
+        }
+        protected override void OnCheckedChanged(EventArgs e)
+        {
+            base.OnCheckedChanged(e);
+            this.canvas.ActiveTool = this;
+            Console.WriteLine("Tool has been changed to " + this.Name);
         }
     }
 }

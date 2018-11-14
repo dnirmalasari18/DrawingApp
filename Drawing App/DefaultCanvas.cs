@@ -5,61 +5,79 @@ using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Threading.Tasks;
+using Drawing_App.Interface;
 
 namespace Drawing_App
 {
     class DefaultCanvas : Control, ICanvas
     {
-        public static int DrawMode = 0;
-        public static int MoveMode = 1;
-        int mode;
         ITool Tool;
-        Point LastPoint, CurrentPoint;
-        IDrawingObject ObjectToMove;
-        public ITool GetTool { get { return this.Tool; } set { this.Tool = value; } }
-        public ICanvas GetCanvas() { return this; }
-        public Control GetControl() { return this; }
+        public ITool ActiveTool { get { return this.Tool; } set { this.Tool = value; } }
 
-        List<IDrawingObject> ObjectToDraw = new List<IDrawingObject>();
+        List<IDrawingObject> ObjectToDraw;
         public List<IDrawingObject> GetDrawingObject() { return this.ObjectToDraw; }
 
-        public void SetMode(int X) { this.mode = X; }
-        public void AddDrawingObject(IDrawingObject DrawObject)
+        public DefaultCanvas()
         {
-            ObjectToDraw.Add(DrawObject);
-            this.Invalidate();
+            this.ObjectToDraw = new List<IDrawingObject>();
+            this.DoubleBuffered = true;
+            this.Tool = null;
+        }
+        public void AddDrawingObject(IDrawingObject obj)
+        {
+            this.ObjectToDraw.Add(obj);
         }
 
+        public void RemoveDrawingObject(IDrawingObject obj)
+        {
+            this.ObjectToDraw.Remove(obj);
+        }
+
+        public IDrawingObject SelectObjectAt(Point pos)
+        {
+            IDrawingObject selected = null;
+
+            foreach (IDrawingObject obj in ObjectToDraw)
+            {
+                selected = obj.Intersect(pos);
+                if (selected != null)
+                {
+                    selected.Select();
+                    break;
+                }
+                Console.WriteLine("Select something" );
+            }
+            if (selected == null)
+            {
+                DeselectAllObject();
+            }
+            return selected;
+        }
+
+        public void DeselectAllObject()
+        {
+            foreach (IDrawingObject obj in this.ObjectToDraw)
+                obj.Deselect();
+        }
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
 
-            Graphics g = e.Graphics;
-            foreach (IDrawingObject i in ObjectToDraw)
-                i.Draw(g, Pens.Black);
+            foreach (IDrawingObject obj in ObjectToDraw)
+            {
+                obj.TargetGraphic = e.Graphics;
+                obj.Draw();
+            }
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
-
-            this.LastPoint = e.Location;
-            if (Tool != null && mode == DefaultCanvas.DrawMode)
+            if (this.Tool != null)
             {
-                Tool.OnMouseDown(e.Location);
-            }
-            else if (Tool != null && mode == DefaultCanvas.MoveMode)
-            {
-                foreach (IDrawingObject currentObject in ObjectToDraw)
-                {
-                    IDrawingObject selected = currentObject.Collide(e.Location);
-
-                    if (selected != null)
-                    {
-                        this.ObjectToMove = selected;
-                        break;
-                    }
-                }
+                this.Tool.OnMouseDown(this, e);
+                this.Invalidate();
+                this.Update();
             }
         }
 
@@ -67,16 +85,11 @@ namespace Drawing_App
         {
             base.OnMouseUp(e);
 
-            this.LastPoint = e.Location;
-            if (Tool != null && mode == DefaultCanvas.DrawMode)
+            if (this.Tool != null)
             {
-                Tool.OnMouseUp(e.Location);
-            }
-            else if (this.ObjectToMove != null && Tool != null && mode == DefaultCanvas.MoveMode)
-            {
-                this.ObjectToMove.Move(CurrentPoint);
-                this.ObjectToMove = null;
+                this.Tool.OnMouseUp(this, e);
                 this.Invalidate();
+                this.Update();
             }
         }
 
@@ -84,14 +97,12 @@ namespace Drawing_App
         {
             base.OnMouseMove(e);
 
-            if (this.ObjectToMove != null && Tool != null && mode == DefaultCanvas.MoveMode)
+            if (this.Tool != null)
             {
-                int tempX = e.Location.X - LastPoint.X;
-                int tempY = e.Location.Y - LastPoint.Y;
-
-                this.CurrentPoint = new Point(tempX, tempY);
+                this.Tool.OnMouseMove(this, e);
+                this.Invalidate();
+                this.Update();
             }
         }
-
     }
 }

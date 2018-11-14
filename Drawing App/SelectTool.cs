@@ -2,56 +2,39 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
 using Drawing_App.Interface;
-
 namespace Drawing_App
 {
-    class SquareTool:ToolStripButton, ITool
+    class SelectTool : ToolStripButton, ITool
     {
         ICanvas canvas;
-        Square square;
-
         public ICanvas TargetCanvas { get { return this.canvas; } set { this.canvas = value; } }
 
-        public SquareTool()
+        public SelectTool()
         {
-            this.Name = "Square Tool";
-            this.Text = "Square";
+            this.Name = "Select Tool";
+            this.Text = "Select";
             this.CheckOnClick = true;
+            
         }
 
         public void OnMouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                square = new Square()
-                {
-                    From = e.Location,
-                    To = e.Location
-                };
-                this.canvas.AddDrawingObject(square);
-            }
+            this.canvas.SelectObjectAt(e.Location);
         }
 
         public void OnMouseUp(object sender, MouseEventArgs e)
         {
-            if (square != null)
-            {
-                square.Deselect();
-                square = null;
-            }
+            
         }
 
         public void OnMouseMove(object sender, MouseEventArgs e)
         {
-            if (square != null)
-            {
-                square.To = e.Location;
-            }
+            
         }
+
         protected override void OnCheckedChanged(EventArgs e)
         {
             base.OnCheckedChanged(e);

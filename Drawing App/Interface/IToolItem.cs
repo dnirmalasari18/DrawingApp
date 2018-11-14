@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Drawing_App.Interface;
+
 namespace Drawing_App
 {
-    interface IToolbox
+    interface IToolItem
     {
+        IToolItem GetToolItem();
         Control GetControl();
-
-        void SetCanvas(ICanvas canvas);
-        void AddTool(ITool tool);
-        void RemoveTool(int x);
     }
 }

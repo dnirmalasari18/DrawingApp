@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Drawing_App
@@ -39,7 +40,7 @@ namespace Drawing_App
             this.AutoScaleMode = AutoScaleMode.Font;
             this.ClientSize = new Size(900, 450);
             this.Name = "MainWindow";
-            this.Text = "Drawing Application";
+            this.Text = "Drawing App";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.ResumeLayout(false);
         }
@@ -52,10 +53,12 @@ namespace Drawing_App
             /// Canvas
             ///
             this.canvas = new DefaultCanvas();
-            this.canvas.GetControl().Location = new Point(50, 0);
-            this.canvas.GetControl().Size = this.ClientSize;
-            this.canvas.GetControl().BackColor = Color.White;
-            this.Controls.Add(canvas.GetControl());
+            Control temp = (Control)canvas;
+            temp.Location = new Point(0, 25);
+            temp.Size = this.ClientSize;
+            temp.BackColor = Color.White;
+            this.Controls.Add(temp);
+            Console.WriteLine("Canvas Successfully Initialized");
         }
 
         private void InitializeToolBox()
@@ -64,13 +67,19 @@ namespace Drawing_App
             /// Toolbox
             ///          
             this.toolbox = new DefaultToolbox();
-            this.toolbox.SetCanvas(this.canvas);
-            this.toolbox.GetControl().Location = new Point(0, 0);
-            this.toolbox.GetControl().Size = new Size(50, this.ClientSize.Height);
-            this.Controls.Add(this.toolbox.GetControl());
+            toolbox.AddTool(new LineTool());
+            toolbox.AddTool(new SquareTool());
+            toolbox.AddTool(new CircleTool());
+            toolbox.AddTool(new SelectTool());
+            ToolStrip temp = (ToolStrip)toolbox;
+            temp.Location = new Point(0, 0);
+            temp.Anchor = AnchorStyles.Left;
+            this.toolbox.SetCanvas(canvas);
+            this.Controls.Add(temp);
+            System.Console.WriteLine("Toolbox Successfully Initialized");
         }
-
-        private ICanvas canvas = null;
-        private IToolbox toolbox = null;
+        
+        ICanvas canvas;
+        IToolbox toolbox;
     }
 }

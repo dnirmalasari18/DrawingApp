@@ -5,46 +5,58 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
+using Drawing_App.Interface;
 
 namespace Drawing_App
 {
-    class CircleTool: Button, ITool
+    class CircleTool : ToolStripButton, ITool
     {
-        Point A;
         ICanvas canvas;
+        Circle circle;
 
-        public ICanvas Canvas { get { return this.canvas; } set { this.canvas = value; } }
-        public ITool GetTool() { return this; }
-        public Control GetControl() { return this; }
+        public ICanvas TargetCanvas { get { return this.canvas; } set { this.canvas = value; } }
 
         public CircleTool()
         {
-            this.Size = new Size(46, 23);
-            this.Location = new Point(2, 50);
+            this.Name = "Circle Tool";
             this.Text = "Circle";
-        }
-        
-        protected override void OnMouseClick(MouseEventArgs e)
-        {
-            base.OnMouseClick(e);
-            this.canvas.GetTool = this;
-            this.canvas.SetMode(DefaultCanvas.DrawMode);
+            this.CheckOnClick = true;
         }
 
-        public void OnMouseDown(Point point)
+        public void OnMouseDown(object sender, MouseEventArgs e)
         {
-            this.A = point;
-        }
-
-        public void OnMouseUp(Point point)
-        {
-            var circle= new Circle()
+            if (e.Button == MouseButtons.Left)
             {
-                From = this.A, To = point
-            };
-
-            canvas.AddDrawingObject(circle);
+                circle = new Circle()
+                {
+                    From = e.Location,
+                    To = e.Location
+                };
+               this.canvas.AddDrawingObject(circle);
+            }
         }
 
+        public void OnMouseUp(object sender, MouseEventArgs e)
+        {
+            if (circle != null)
+            {
+                circle.Deselect();
+                circle = null;
+            }
+        }
+
+        public void OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (circle != null)
+            {
+                circle.To = e.Location;
+            }
+        }
+        protected override void OnCheckedChanged(EventArgs e)
+        {
+            base.OnCheckedChanged(e);
+            this.canvas.ActiveTool = this;
+            Console.WriteLine("Tool has been changed to " + this.Name);
+        }
     }
 }
