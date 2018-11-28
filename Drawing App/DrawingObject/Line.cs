@@ -7,7 +7,7 @@ using System.Drawing.Drawing2D;
 using System.Threading.Tasks;
 using Drawing_App.Interface;
 
-namespace Drawing_App
+namespace Drawing_App.DrawingObject
 {
     class Line : IDrawingObject
     {
@@ -15,10 +15,12 @@ namespace Drawing_App
         private Pen pen;
         IState currentState;
         Graphics graph;
-
+        List<IDrawingObject> Component;
         public Point From { get { return this.a; } set { this.a = value; } }
         public Point To { get { return this.b; } set { this.b = value; } }
         public Graphics TargetGraphic { set { this.graph = value; } }
+        public event EventHandler LocationChanged;
+
         public Line()
         {
             this.pen = new Pen(Color.Black);
@@ -40,6 +42,29 @@ namespace Drawing_App
             this.currentState = StaticState.GetInstance();
         }
 
+        public void Translate(Point pos)
+        {
+            this.a.X += pos.X;
+            this.a.Y += pos.Y;
+            this.b.X += pos.X;
+            this.b.Y += pos.Y;
+
+            foreach (IDrawingObject obj in this.Component)
+            {
+                obj.Translate(pos);
+            }
+
+            OnLocationChanged();
+
+        }
+
+        void OnLocationChanged()
+        {
+            if (LocationChanged != null)
+            {
+                LocationChanged(this, EventArgs.Empty);
+            }
+        }
         public IDrawingObject Intersect(Point pos)
         {
             int x = this.From.X, y = this.To.Y;

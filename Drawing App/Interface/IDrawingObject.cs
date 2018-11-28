@@ -15,7 +15,7 @@ namespace Drawing_App.Interface
         void Draw();
         void Select();
         void Deselect();
-        void Translate();
+        void Translate(Point pos);
         IDrawingObject Intersect(Point pos);
         void RenderOnPreview();
         void RenderOnStatic();

@@ -7,7 +7,7 @@ using System.Drawing;
 using Drawing_App.Interface;
 using System.Drawing.Drawing2D;
 
-namespace Drawing_App
+namespace Drawing_App.DrawingObject
 {
     class Circle : IDrawingObject
     {
@@ -46,13 +46,13 @@ namespace Drawing_App
             int x = this.From.X, y = this.To.Y;
             if (this.From.X > this.To.X) x = this.To.X;
             if (this.From.Y > this.To.Y) y = this.To.Y;
-
+            
             if (pos.X > x && pos.X < x + Math.Abs(this.From.X - this.To.X) && pos.Y > y && pos.Y < y + Math.Abs(this.From.Y - this.To.Y)) return this;
             return null;
         }
-        public void Translate()
+        public void Translate(Point pos)
         {
-
+            int x = pos.X, y = pos.Y;
         }
         public void RenderOnPreview()
         {

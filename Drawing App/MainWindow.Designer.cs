@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-
+using Drawing_App.Interface;
+using Drawing_App.Tool;
 namespace Drawing_App
 {
     partial class MainWindow

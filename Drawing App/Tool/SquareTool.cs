@@ -6,20 +6,21 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
 using Drawing_App.Interface;
+using Drawing_App.DrawingObject;
 
-namespace Drawing_App
+namespace Drawing_App.Tool
 {
-    class CircleTool : ToolStripButton, ITool
+    class SquareTool:ToolStripButton, ITool
     {
         ICanvas canvas;
-        Circle circle;
+        Square square;
 
         public ICanvas TargetCanvas { get { return this.canvas; } set { this.canvas = value; } }
 
-        public CircleTool()
+        public SquareTool()
         {
-            this.Name = "Circle Tool";
-            this.Text = "Circle";
+            this.Name = "Square Tool";
+            this.Text = "Square";
             this.CheckOnClick = true;
         }
 
@@ -27,29 +28,29 @@ namespace Drawing_App
         {
             if (e.Button == MouseButtons.Left)
             {
-                circle = new Circle()
+                square = new Square()
                 {
                     From = e.Location,
                     To = e.Location
                 };
-               this.canvas.AddDrawingObject(circle);
+                this.canvas.AddDrawingObject(square);
             }
         }
 
         public void OnMouseUp(object sender, MouseEventArgs e)
         {
-            if (circle != null)
+            if (square != null)
             {
-                circle.Deselect();
-                circle = null;
+                square.Deselect();
+                square = null;
             }
         }
 
         public void OnMouseMove(object sender, MouseEventArgs e)
         {
-            if (circle != null)
+            if (square != null)
             {
-                circle.To = e.Location;
+                square.To = e.Location;
             }
         }
         protected override void OnCheckedChanged(EventArgs e)

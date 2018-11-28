@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using Drawing_App.Interface;
-namespace Drawing_App
+namespace Drawing_App.DrawingObject
 {
     class Square : IDrawingObject
     {
@@ -38,7 +38,10 @@ namespace Drawing_App
         {
             this.currentState = StaticState.GetInstance();
         }
+        public void Translate(Point Pos)
+        {
 
+        }
         public IDrawingObject Intersect(Point pos)
         {
             int x = this.From.X, y = this.To.Y;

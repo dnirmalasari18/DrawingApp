@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Drawing_App.Interface;
 
-namespace Drawing_App
+namespace Drawing_App.Interface
 {
     interface IToolbar
     {
