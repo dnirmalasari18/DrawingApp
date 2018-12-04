@@ -9,13 +9,14 @@ namespace Drawing_App.Interface
 {
     interface IDrawingObject
     {
+        Graphics TargetGraphic { set; }
         Point From { get; set; }
         Point To { get; set; }
-        Graphics TargetGraphic { set; }
+        
         void Draw();
         void Select();
         void Deselect();
-        void Translate(Point pos);
+        void Translate();
         IDrawingObject Intersect(Point pos);
         void RenderOnPreview();
         void RenderOnStatic();

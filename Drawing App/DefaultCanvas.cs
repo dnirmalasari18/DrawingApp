@@ -11,11 +11,10 @@ namespace Drawing_App
 {
     class DefaultCanvas : Control, ICanvas
     {
+        List<IDrawingObject> ObjectToDraw;
         ITool Tool;
         public ITool ActiveTool { get { return this.Tool; } set { this.Tool = value; } }
 
-        List<IDrawingObject> ObjectToDraw;
-        public List<IDrawingObject> GetDrawingObject() { return this.ObjectToDraw; }
 
         public DefaultCanvas()
         {
@@ -45,8 +44,8 @@ namespace Drawing_App
                     selected.Select();
                     break;
                 }
-                Console.WriteLine("Select something" );
             }
+
             if (selected == null)
             {
                 DeselectAllObject();

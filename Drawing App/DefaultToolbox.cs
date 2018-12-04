@@ -15,24 +15,24 @@ namespace Drawing_App
 
         }
 
-        public void SetCanvas(ICanvas canvas)
-        {
-            foreach (ITool tool in this.Items)
-                tool.TargetCanvas = canvas;
-        }
+
 
         public void AddTool(ITool tool)
         {
             ToolStripButton temp = (ToolStripButton)tool;
             this.Items.Add(temp);
-            Console.WriteLine(tool.ToString() + " is added to your toolbox");
         }
 
         public void RemoveTool(ITool tool)
         {
             ToolStripButton temp = (ToolStripButton)tool;
             this.Items.Add(temp);
-            Console.WriteLine(tool.ToString() + " is removed to your toolbox");
+        }
+
+        public void SetCanvas(ICanvas canvas)
+        {
+            foreach (ITool tool in this.Items)
+                tool.TargetCanvas = canvas;
         }
     }
 }

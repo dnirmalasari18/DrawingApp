@@ -19,6 +19,7 @@ namespace Drawing_App.Tool
             
         }
         public ICanvas TargetCanvas { get { return this.canvas; } set { this.canvas = value; } }
+
         public void OnMouseDown(object sender, MouseEventArgs e)
         {
             this.canvas.SelectObjectAt(e.Location);
@@ -39,7 +40,6 @@ namespace Drawing_App.Tool
         {
             base.OnCheckedChanged(e);
             this.canvas.ActiveTool = this;
-            Console.WriteLine("Tool has been changed to " + this.Name);
         }
     }
 }

@@ -12,16 +12,19 @@ namespace Drawing_App.DrawingObject
     {
         Point a, b;
         private Pen pen;
+
         IState currentState;
         Graphics graph;
 
         public Point From { get { return this.a; } set { this.a = value; } }
         public Point To { get { return this.b; } set { this.b = value; } }
+
         public Graphics TargetGraphic { set { this.graph = value; } }
+
         public Square()
         {
-            this.pen = new Pen(Color.Black);
             this.currentState = PrevState.GetInstance();
+            this.pen = new Pen(Color.Black);
         }
         public void Draw()
         {
@@ -38,25 +41,28 @@ namespace Drawing_App.DrawingObject
         {
             this.currentState = StaticState.GetInstance();
         }
-        public void Translate(Point Pos)
-        {
-
-        }
         public IDrawingObject Intersect(Point pos)
         {
-            int x = this.From.X, y = this.To.Y;
+            int x = this.From.X, y = this.From.Y;
             if (this.From.X > this.To.X) x = this.To.X;
             if (this.From.Y > this.To.Y) y = this.To.Y;
 
             if (pos.X > x && pos.X < x + Math.Abs(this.From.X - this.To.X) && pos.Y > y && pos.Y < y + Math.Abs(this.From.Y - this.To.Y)) return this;
             return null;
         }
+        public void Translate()
+        {
+
+        }
+
+
+
 
         public void RenderOnPreview()
         {
             pen.Color = Color.Red;
             pen.Width = 1.5f;
-            pen.DashStyle = DashStyle.Dash;
+            pen.DashStyle = DashStyle.Solid;
             int x = this.From.X, y = this.From.Y;
             if (this.From.X > this.To.X) x = this.To.X;
             if (this.From.Y > this.To.Y) y = this.To.Y;
@@ -80,6 +86,7 @@ namespace Drawing_App.DrawingObject
                 this.graph.SmoothingMode = SmoothingMode.AntiAlias;
                 this.graph.DrawRectangle(pen, x, y, Math.Abs(this.From.X - this.To.X), Math.Abs(this.From.Y - this.To.Y));
             }
+
         }
 
         public void RenderOnMoveState()
@@ -94,6 +101,7 @@ namespace Drawing_App.DrawingObject
             {
                 this.graph.SmoothingMode = SmoothingMode.AntiAlias;
                 this.graph.DrawRectangle(pen, x, y, Math.Abs(this.From.X - this.To.X), Math.Abs(this.From.Y - this.To.Y));
+                this.graph.DrawEllipse(pen, x, y, Math.Abs(this.From.X - this.To.X), Math.Abs(this.From.Y - this.To.Y));
             }
         }
     }
