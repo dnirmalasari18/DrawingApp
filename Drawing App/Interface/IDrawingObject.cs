@@ -12,12 +12,18 @@ namespace Drawing_App.Interface
         Graphics TargetGraphic { set; }
         Point From { get; set; }
         Point To { get; set; }
-        
+        event EventHandler LocationChanged;
+
         void Draw();
         void Select();
         void Deselect();
-        void Translate();
+        void Translate(Point pos);
         IDrawingObject Intersect(Point pos);
+
+        List<IDrawingObject> GetComponent();
+        void AddComponent(IDrawingObject obj);
+        void RemoveComponent(IDrawingObject obj);
+
         void RenderOnPreview();
         void RenderOnStatic();
         void RenderOnMoveState();

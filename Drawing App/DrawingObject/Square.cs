@@ -10,14 +10,15 @@ namespace Drawing_App.DrawingObject
 {
     class Square : IDrawingObject
     {
-        Point a, b;
+        Point start, end;
         private Pen pen;
-
+        public event EventHandler LocationChanged;
         IState currentState;
         Graphics graph;
-
-        public Point From { get { return this.a; } set { this.a = value; } }
-        public Point To { get { return this.b; } set { this.b = value; } }
+        List<IDrawingObject> component;
+        List<ControlPoint> controlPoint;
+        public Point From { get { return this.start; } set { this.start = value; } }
+        public Point To { get { return this.end; } set { this.end = value; } }
 
         public Graphics TargetGraphic { set { this.graph = value; } }
 
@@ -25,21 +26,52 @@ namespace Drawing_App.DrawingObject
         {
             this.currentState = PrevState.GetInstance();
             this.pen = new Pen(Color.Black);
+            this.component = new List<IDrawingObject>();
         }
         public void Draw()
         {
             this.currentState.Draw(this);
+            foreach (IDrawingObject obj in this.component)
+            {
+                obj.TargetGraphic = this.graph;
+                obj.Draw();
+            }
         }
 
         public void Select()
         {
             if (this.currentState.Next() != null)
+            {
                 this.currentState = this.currentState.Next();
+                foreach (IDrawingObject obj in this.component)
+                {
+                    obj.Select();
+                }
+            }
         }
 
         public void Deselect()
         {
             this.currentState = StaticState.GetInstance();
+            foreach (IDrawingObject obj in this.component)
+            {
+                obj.Deselect();
+            }
+            controlPoint = null;
+        }
+        public List<IDrawingObject> GetComponent()
+        {
+            return this.component;
+        }
+
+        public void AddComponent(IDrawingObject obj)
+        {
+            this.component.Add(obj);
+        }
+
+        public void RemoveComponent(IDrawingObject obj)
+        {
+            this.component.Remove(obj);
         }
         public IDrawingObject Intersect(Point pos)
         {
@@ -48,15 +80,26 @@ namespace Drawing_App.DrawingObject
             if (this.From.Y > this.To.Y) y = this.To.Y;
 
             if (pos.X > x && pos.X < x + Math.Abs(this.From.X - this.To.X) && pos.Y > y && pos.Y < y + Math.Abs(this.From.Y - this.To.Y)) return this;
+            foreach (IDrawingObject obj in this.component)
+            {
+                IDrawingObject temp = obj.Intersect(pos);
+                if (temp != null) return this;
+            }
             return null;
         }
-        public void Translate()
+
+        public void Translate(Point pos)
         {
-
+            this.start.X += pos.X;
+            this.start.Y += pos.Y;
+            this.end.X += pos.X;
+            this.end.Y += pos.Y;
+            foreach (IDrawingObject obj in this.component)
+            {
+                obj.Translate(pos);
+            }
+            OnLocationChanged();
         }
-
-
-
 
         public void RenderOnPreview()
         {
@@ -83,8 +126,12 @@ namespace Drawing_App.DrawingObject
             if (this.From.Y > this.To.Y) y = this.To.Y;
             if (this.graph != null)
             {
-                this.graph.SmoothingMode = SmoothingMode.AntiAlias;
-                this.graph.DrawRectangle(pen, x, y, Math.Abs(this.From.X - this.To.X), Math.Abs(this.From.Y - this.To.Y));
+                SolidBrush solidBrush = new SolidBrush(Color.White);
+                GraphicsPath grapPath = new GraphicsPath();
+                Rectangle rectangle = new Rectangle(x, y, Math.Abs(this.start.X - this.end.X), Math.Abs(this.start.Y - this.end.Y));
+                grapPath.AddRectangle(rectangle);
+                this.graph.FillPath(solidBrush, grapPath);
+                this.graph.DrawPath(pen, grapPath);
             }
 
         }
@@ -99,9 +146,20 @@ namespace Drawing_App.DrawingObject
             if (this.From.Y > this.To.Y) y = this.To.Y;
             if (this.graph != null)
             {
-                this.graph.SmoothingMode = SmoothingMode.AntiAlias;
-                this.graph.DrawRectangle(pen, x, y, Math.Abs(this.From.X - this.To.X), Math.Abs(this.From.Y - this.To.Y));
-                this.graph.DrawEllipse(pen, x, y, Math.Abs(this.From.X - this.To.X), Math.Abs(this.From.Y - this.To.Y));
+                SolidBrush solidBrush = new SolidBrush(Color.White);
+                GraphicsPath grapPath = new GraphicsPath();
+                Rectangle rectangle = new Rectangle(x, y, Math.Abs(this.start.X - this.end.X), Math.Abs(this.start.Y - this.end.Y));
+                grapPath.AddRectangle(rectangle);
+                this.graph.FillPath(solidBrush, grapPath);
+                this.graph.DrawPath(pen, grapPath);
+            }
+        }
+
+        void OnLocationChanged()
+        {
+            if (LocationChanged != null)
+            {
+                LocationChanged(this, EventArgs.Empty);
             }
         }
     }

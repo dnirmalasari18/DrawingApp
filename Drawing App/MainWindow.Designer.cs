@@ -68,10 +68,13 @@ namespace Drawing_App
             /// Toolbox
             ///          
             this.toolbox = new DefaultToolbox();
+            toolbox.AddTool(new UndoTool());
+            toolbox.AddTool(new RedoTool());
+            toolbox.AddTool(new SelectTool());
+            toolbox.AddTool(new LineConnectorTool());
             toolbox.AddTool(new LineTool());
             toolbox.AddTool(new SquareTool());
             toolbox.AddTool(new CircleTool());
-            toolbox.AddTool(new SelectTool());
             ToolStrip temp = (ToolStrip)toolbox;
             temp.Location = new Point(0, 0);
             temp.Anchor = AnchorStyles.Left;
@@ -79,7 +82,7 @@ namespace Drawing_App
             this.Controls.Add(temp);
             System.Console.WriteLine("Toolbox Successfully Initialized");
         }
-        
+
         ICanvas canvas;
         IToolbox toolbox;
     }

@@ -53,11 +53,23 @@ namespace Drawing_App.Tool
                 square.To = e.Location;
             }
         }
+        public void OnKeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+        public void OnKeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
         protected override void OnCheckedChanged(EventArgs e)
         {
             base.OnCheckedChanged(e);
+        }
+        protected override void OnClick(EventArgs e)
+        {
+            base.OnClick(e);
             this.canvas.ActiveTool = this;
-            Console.WriteLine("Tool has been changed to " + this.Name);
+            this.canvas.DeselectAllObject();
         }
     }
 }

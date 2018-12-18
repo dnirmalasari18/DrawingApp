@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Threading.Tasks;
 using Drawing_App.Interface;
-
+using Drawing_App.UndoRedoCommand;
 namespace Drawing_App
 {
     class DefaultCanvas : Control, ICanvas
@@ -14,19 +14,24 @@ namespace Drawing_App
         List<IDrawingObject> ObjectToDraw;
         ITool Tool;
         public ITool ActiveTool { get { return this.Tool; } set { this.Tool = value; } }
-
+        IUndoRedo undoRedo;
 
         public DefaultCanvas()
         {
             this.ObjectToDraw = new List<IDrawingObject>();
             this.DoubleBuffered = true;
             this.Tool = null;
+            this.undoRedo = new DefaultUndoRedo(this);
         }
         public void AddDrawingObject(IDrawingObject obj)
         {
             this.ObjectToDraw.Add(obj);
         }
 
+        public void AddDrawingObjectAt(int index, IDrawingObject obj)
+        {
+            this.ObjectToDraw.Insert(index, obj);
+        }
         public void RemoveDrawingObject(IDrawingObject obj)
         {
             this.ObjectToDraw.Remove(obj);
@@ -45,11 +50,6 @@ namespace Drawing_App
                     break;
                 }
             }
-
-            if (selected == null)
-            {
-                DeselectAllObject();
-            }
             return selected;
         }
 
@@ -58,6 +58,31 @@ namespace Drawing_App
             foreach (IDrawingObject obj in this.ObjectToDraw)
                 obj.Deselect();
         }
+
+        public void AddCommand(ICommand command)
+        {
+            this.undoRedo.AddCommand(command);
+        }
+
+        public void RemoveCommand(ICommand command)
+        {
+            this.undoRedo.RemoveCommand(command);
+        }
+
+        public void Undo()
+        {
+            this.undoRedo.Undo();
+            this.Invalidate();
+            this.Update();
+        }
+
+        public void Redo()
+        {
+            this.undoRedo.Redo();
+            this.Invalidate();
+            this.Update();
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -99,6 +124,28 @@ namespace Drawing_App
             if (this.Tool != null)
             {
                 this.Tool.OnMouseMove(this, e);
+                this.Invalidate();
+                this.Update();
+            }
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+            if (this.Tool != null)
+            {
+                this.Tool.OnKeyDown(this, e);
+                this.Invalidate();
+                this.Update();
+            }
+        }
+
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+            base.OnKeyUp(e);
+            if (this.Tool != null)
+            {
+                this.Tool.OnKeyUp(this, e);
                 this.Invalidate();
                 this.Update();
             }
