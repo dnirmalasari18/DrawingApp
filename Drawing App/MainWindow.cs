@@ -16,6 +16,7 @@ namespace Drawing_App
             InitializeComponent();
             InitializeCanvas();
             InitializeToolBox();
+            //InitializeButton();
         }
 
         private void MainWindow_Load(object sender, EventArgs e)

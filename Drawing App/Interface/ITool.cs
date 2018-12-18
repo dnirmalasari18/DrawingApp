@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using System.Drawing;
 namespace Drawing_App.Interface
 {
-    interface ITool
+    public interface ITool
     {
         ICanvas TargetCanvas { get; set; }
         void OnMouseDown(object sender, MouseEventArgs e);

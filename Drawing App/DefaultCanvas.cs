@@ -151,5 +151,10 @@ namespace Drawing_App
                 this.Update();
             }
         }
+        public void SelectColor()
+        {
+            ColorDialog cd = new ColorDialog();
+            cd.ShowDialog();
+        }
     }
 }

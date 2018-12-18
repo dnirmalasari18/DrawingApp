@@ -13,7 +13,7 @@ namespace Drawing_App.DrawingObject
         private Pen pen;
         IState currentState;
         Graphics graph;
-        List<IDrawingObject> component;
+        //List<IDrawingObject> component;
         public Point From { get { return this.start; } set { this.start = value; } }
         public Point To { get { return this.end; } set { this.end = value; } }
 

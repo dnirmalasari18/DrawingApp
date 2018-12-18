@@ -22,6 +22,7 @@ namespace Drawing_App.DrawingObject
         public Point To { get { return this.end; } set { this.end = value; } }
 
         public Graphics TargetGraphic { set { this.graph = value; } }
+        Color colorPen;
         //public string ObjName { get { return "Circle"; } }
         string name="Circle";
         public string ObjName { get { return this.name; }  }
@@ -30,6 +31,12 @@ namespace Drawing_App.DrawingObject
             this.currentState = PrevState.GetInstance();
             this.pen = new Pen(Color.Black);
             this.component = new List<IDrawingObject>();
+        }
+
+        public void SetColor(IColorPick colorpick)
+        {
+            colorPen = colorpick.GetColor;
+            Console.WriteLine(colorPen);
         }
         public void Draw()
         {
@@ -122,7 +129,7 @@ namespace Drawing_App.DrawingObject
         public void RenderOnStatic()
         {
             pen.Color = Color.Black;
-            pen.Width = 1.5f;
+            pen.Width = 3f;
             pen.DashStyle = DashStyle.Solid;
             int x = this.From.X, y = this.From.Y;
             if (this.From.X > this.To.X) x = this.To.X;

@@ -59,9 +59,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColorPicker.cs" />
     <Compile Include="CreateDrawingObjectCommand.cs" />
     <Compile Include="DrawingObject\ControlPoint.cs" />
+    <Compile Include="Interface\IColorPick.cs" />
     <Compile Include="Interface\IUndoRedo.cs" />
+    <Compile Include="Tool\ColorTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Tool\LineConnectorTool.cs">
       <SubType>Component</SubType>
     </Compile>

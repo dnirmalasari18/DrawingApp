@@ -14,12 +14,13 @@ namespace Drawing_App.Interface
         Point From { get; set; }
         Point To { get; set; }
         string ObjName { get;  }
+
+        //void SetColor(IColorPick color);
         void Draw();
         void Select();
         void Deselect();
         void Translate(Point pos);
         IDrawingObject Intersect(Point pos);
-
         List<IDrawingObject> GetComponent();
         void AddComponent(IDrawingObject obj);
         void RemoveComponent(IDrawingObject obj);

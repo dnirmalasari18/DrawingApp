@@ -10,7 +10,6 @@ namespace Drawing_App
 {
     class DefaultToolbox : ToolStrip, IToolbox
     {
-        ITool tool;
         public DefaultToolbox()
         {
 

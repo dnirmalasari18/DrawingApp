@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Drawing_App.Interface
 {
-    interface ICanvas
+    public interface ICanvas
     {
         ITool ActiveTool { get; set; }
         
@@ -21,5 +21,6 @@ namespace Drawing_App.Interface
         void Redo();
         void AddCommand(ICommand command);
         void RemoveCommand(ICommand command);
+        //void SelectColor();
     }
 }
