@@ -16,13 +16,15 @@ namespace Drawing_App.DrawingObject
         public event EventHandler LocationChanged;
         IState currentState;
         Graphics graph;
+        
         List<IDrawingObject> component;
-
         public Point From { get { return this.start; } set { this.start = value; } }
         public Point To { get { return this.end; } set { this.end = value; } }
 
         public Graphics TargetGraphic { set { this.graph = value; } }
-
+        //public string ObjName { get { return "Circle"; } }
+        string name="Circle";
+        public string ObjName { get { return this.name; }  }
         public Circle()
         {
             this.currentState = PrevState.GetInstance();
@@ -100,7 +102,6 @@ namespace Drawing_App.DrawingObject
             }
             OnLocationChanged();
         }
-
         
 
         public void RenderOnPreview()

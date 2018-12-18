@@ -21,7 +21,7 @@ namespace Drawing_App.DrawingObject
         public Point To { get { return this.end; } set { this.end = value; } }
 
         public Graphics TargetGraphic { set { this.graph = value; } }
-
+        public string ObjName { get { return "Square"; } }
         public Square()
         {
             this.currentState = PrevState.GetInstance();

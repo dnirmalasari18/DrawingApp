@@ -10,6 +10,7 @@ namespace Drawing_App
 {
     class DefaultToolbox : ToolStrip, IToolbox
     {
+        ITool tool;
         public DefaultToolbox()
         {
 
@@ -21,18 +22,26 @@ namespace Drawing_App
         {
             ToolStripButton temp = (ToolStripButton)tool;
             this.Items.Add(temp);
+            temp.CheckedChanged += UnCheckToolStripButton;
         }
 
         public void RemoveTool(ITool tool)
         {
-            ToolStripButton temp = (ToolStripButton)tool;
-            this.Items.Add(temp);
+            this.Items.Remove((ToolStripButton)tool);
         }
 
         public void SetCanvas(ICanvas canvas)
         {
             foreach (ITool tool in this.Items)
                 tool.TargetCanvas = canvas;
+        }
+
+        public void UnCheckToolStripButton(object sender, EventArgs e)
+        {
+            foreach (ToolStripButton tool in this.Items)
+            {
+                tool.Checked = false;
+            }
         }
     }
 }

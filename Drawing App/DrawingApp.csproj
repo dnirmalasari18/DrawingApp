@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateDrawingObjectCommand.cs" />
     <Compile Include="DrawingObject\ControlPoint.cs" />
     <Compile Include="Interface\IUndoRedo.cs" />
     <Compile Include="Tool\LineConnectorTool.cs">
@@ -71,7 +72,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="TranslateCommand.cs" />
-    <Compile Include="UndoRedoCommand\DefaultUndoRedo.cs" />
+    <Compile Include="UndoRedo\DefaultUndoRedo.cs" />
     <Compile Include="DrawingObject\Circle.cs" />
     <Compile Include="DrawingObject\LineConnector.cs" />
     <Compile Include="Interface\ICommand.cs" />

@@ -41,6 +41,8 @@ namespace Drawing_App.Tool
         {
             if (square != null)
             {
+                CreateDrawingObjectCommand cmd = new CreateDrawingObjectCommand(this.square, this.canvas);
+                this.canvas.AddCommand(cmd);
                 square.Deselect();
                 square = null;
             }

@@ -41,6 +41,8 @@ namespace Drawing_App.Tool
         {
             if (circle != null)
             {
+                CreateDrawingObjectCommand cmd = new CreateDrawingObjectCommand(this.circle, this.canvas);
+                this.canvas.AddCommand(cmd);
                 circle.Deselect();
                 circle = null;
             }

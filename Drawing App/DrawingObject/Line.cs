@@ -9,7 +9,7 @@ using Drawing_App.Interface;
 
 namespace Drawing_App.DrawingObject
 {
-    class Line : IDrawingObject
+    public class Line : IDrawingObject
     {
         protected Point start, end;
         private Pen pen;
@@ -17,7 +17,8 @@ namespace Drawing_App.DrawingObject
         IState currentState;
         Graphics graph;
         List<IDrawingObject> component;
-
+        string name = "Line";
+        public virtual string ObjName { get { return this.name; } }
         public Point From { get { return this.start; } set { this.start = value; } }
         public Point To { get { return this.end; } set { this.end = value; } }
         

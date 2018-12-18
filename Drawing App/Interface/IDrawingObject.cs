@@ -7,13 +7,13 @@ using System.Drawing;
 
 namespace Drawing_App.Interface
 {
-    interface IDrawingObject
+    public interface IDrawingObject
     {
+        event EventHandler LocationChanged;
         Graphics TargetGraphic { set; }
         Point From { get; set; }
         Point To { get; set; }
-        event EventHandler LocationChanged;
-
+        string ObjName { get;  }
         void Draw();
         void Select();
         void Deselect();

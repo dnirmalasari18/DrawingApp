@@ -27,15 +27,18 @@ namespace Drawing_App.Tool
             if (e.Button == MouseButtons.Left)
             {
                 IDrawingObject temp = this.TargetCanvas.SelectObjectAt(e.Location);
-                lineConnector = new LineConnector()
+                if (temp != null && temp.ObjName!="LineCon")
                 {
-                    A = temp,
-                    To = e.Location
-                    
-                };
-                this.TargetCanvas.AddDrawingObject(lineConnector);
-                temp.Deselect();
-                this.canvas.AddDrawingObject(lineConnector);
+                    Console.WriteLine(temp.ObjName);
+                    lineConnector = new LineConnector()
+                    {
+                        A = temp,
+                        To = e.Location
+
+                    };
+                    this.TargetCanvas.AddDrawingObject(lineConnector);
+                    temp.Deselect();
+                }   
             }
         }
 
@@ -49,8 +52,7 @@ namespace Drawing_App.Tool
                 {
                     lineConnector.B = temp;
                     lineConnector.B = temp;
-                    //CreateDrawingObjectCommand cmd = new CreateDrawingObjectCommand(this.lineConnector, this.TargetCanvas);
-                   // this._targetCanvas.AddCommand(cmd);
+
                     lineConnector.Deselect();
                     this.TargetCanvas.RemoveDrawingObject(lineConnector);
                     this.TargetCanvas.AddDrawingObjectAt(0, lineConnector);

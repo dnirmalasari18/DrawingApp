@@ -32,6 +32,7 @@ namespace Drawing_App
         {
             this.ObjectToDraw.Insert(index, obj);
         }
+
         public void RemoveDrawingObject(IDrawingObject obj)
         {
             this.ObjectToDraw.Remove(obj);

@@ -40,6 +40,8 @@ namespace Drawing_App.Tool
         {
             if (line != null)
             {
+                CreateDrawingObjectCommand cmd = new CreateDrawingObjectCommand(this.line, this.canvas);
+                this.canvas.AddCommand(cmd);
                 line.Deselect();
                 line = null;
             }
