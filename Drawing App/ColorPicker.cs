@@ -10,11 +10,12 @@ namespace Drawing_App
     class ColorPicker : IColorPick
     {
         ColorDialog cd = new ColorDialog();
-        Color colorPicked = Color.Black;
+        Color colorPicked;// = Color.Black;
         public Color GetColor { get { return this.colorPicked; } }
         public ColorPicker()
         {
             //this.showDialogBox();
+            this.colorPicked = Color.Black;
         }
 
         public void showDialogBox()

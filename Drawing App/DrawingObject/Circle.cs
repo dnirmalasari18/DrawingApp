@@ -29,7 +29,7 @@ namespace Drawing_App.DrawingObject
         public Circle()
         {
             this.currentState = PrevState.GetInstance();
-            this.pen = new Pen(Color.Black);
+            this.pen = new Pen(colorPen);
             this.component = new List<IDrawingObject>();
         }
 
@@ -128,7 +128,8 @@ namespace Drawing_App.DrawingObject
 
         public void RenderOnStatic()
         {
-            pen.Color = Color.Black;
+            pen.Color =colorPen;
+            Console.WriteLine(pen.Color);
             pen.Width = 3f;
             pen.DashStyle = DashStyle.Solid;
             int x = this.From.X, y = this.From.Y;
