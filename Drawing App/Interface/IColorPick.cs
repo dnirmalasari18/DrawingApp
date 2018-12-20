@@ -7,7 +7,8 @@ namespace Drawing_App.Interface
 {
     public interface IColorPick
     {
-        void showDialogBox();
+        void ShowDialogBox();
         Color GetColor { get; }
+        Color Hehehe();
     }
 }

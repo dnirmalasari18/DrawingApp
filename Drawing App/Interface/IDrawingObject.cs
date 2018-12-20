@@ -15,6 +15,7 @@ namespace Drawing_App.Interface
         Point To { get; set; }
         string ObjName { get;  }
 
+        //IColorPick ActiveColor { get; set; }
         //void SetColor(IColorPick color);
         void Draw();
         void Select();

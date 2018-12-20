@@ -14,13 +14,16 @@ namespace Drawing_App
         List<IDrawingObject> ObjectToDraw;
         ITool Tool;
         public ITool ActiveTool { get { return this.Tool; } set { this.Tool = value; } }
+        
         IUndoRedo undoRedo;
 
         public DefaultCanvas()
-        {
+        { 
+            //Console.WriteLine(colorPick);
             this.ObjectToDraw = new List<IDrawingObject>();
             this.DoubleBuffered = true;
             this.Tool = null;
+
             this.undoRedo = new DefaultUndoRedo(this);
         }
         public void AddDrawingObject(IDrawingObject obj)
@@ -151,10 +154,10 @@ namespace Drawing_App
                 this.Update();
             }
         }
-        public void SelectColor()
+        /*public void SelectColor()
         {
             ColorDialog cd = new ColorDialog();
             cd.ShowDialog();
-        }
+        }*/
     }
 }

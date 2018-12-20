@@ -9,7 +9,7 @@ using Drawing_App.Interface;
 
 namespace Drawing_App.DrawingObject
 {
-    class Circle : IDrawingObject
+    public class Circle : IDrawingObject
     {
         Point start, end;
         private Pen pen;
@@ -20,24 +20,25 @@ namespace Drawing_App.DrawingObject
         List<IDrawingObject> component;
         public Point From { get { return this.start; } set { this.start = value; } }
         public Point To { get { return this.end; } set { this.end = value; } }
-
         public Graphics TargetGraphic { set { this.graph = value; } }
-        Color colorPen;
-        //public string ObjName { get { return "Circle"; } }
+
         string name="Circle";
         public string ObjName { get { return this.name; }  }
+        
+        //Color colorPen;
+        //IColorPick ActiveColor { get { return this.colorPen; } set { this.colorPen = value; } }
         public Circle()
-        {
+        {   
             this.currentState = PrevState.GetInstance();
-            this.pen = new Pen(colorPen);
             this.component = new List<IDrawingObject>();
+            this.pen = new Pen(Color.Black);
         }
 
-        public void SetColor(IColorPick colorpick)
+        /*public void ActiveColor()
         {
-            colorPen = colorpick.GetColor;
+            colorPen = colorPick.GetColor;
             Console.WriteLine(colorPen);
-        }
+        }*/
         public void Draw()
         {
             this.currentState.Draw(this);
@@ -128,7 +129,7 @@ namespace Drawing_App.DrawingObject
 
         public void RenderOnStatic()
         {
-            pen.Color =colorPen;
+            pen.Color = Color.Black;
             Console.WriteLine(pen.Color);
             pen.Width = 3f;
             pen.DashStyle = DashStyle.Solid;

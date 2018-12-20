@@ -13,7 +13,7 @@ namespace Drawing_App.Tool
     {
         ICanvas canvas;
         Line line;
-
+        
         public ICanvas TargetCanvas { get { return this.canvas; } set { this.canvas = value; } }
 
         public LineTool()

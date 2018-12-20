@@ -14,6 +14,7 @@ namespace Drawing_App.Tool
         bool StateShiftDown, StateLeftMouseDown;
         Point lastPoint, lastDiff;
         bool Move;
+
         public SelectTool()
         {
             this.Name = "Select Tool";

@@ -10,7 +10,6 @@ namespace Drawing_App.Interface
     public interface ICanvas
     {
         ITool ActiveTool { get; set; }
-        
         void AddDrawingObject(IDrawingObject DrawObject);
         void AddDrawingObjectAt(int index, IDrawingObject obj);
         void RemoveDrawingObject(IDrawingObject obj);

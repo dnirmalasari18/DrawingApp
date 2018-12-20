@@ -10,6 +10,7 @@ namespace Drawing_App.Interface
     public interface ITool
     {
         ICanvas TargetCanvas { get; set; }
+        //IColorPick ActiveColor { get; set; }
         void OnMouseDown(object sender, MouseEventArgs e);
         void OnMouseUp(object sender, MouseEventArgs e);
         void OnMouseMove(object sender, MouseEventArgs e);

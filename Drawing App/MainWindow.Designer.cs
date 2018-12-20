@@ -55,7 +55,7 @@ namespace Drawing_App
             ///
             this.canvas = new DefaultCanvas();
             Control temp = (Control)canvas;
-            temp.Location = new Point(0, 50);
+            temp.Location = new Point(0,25);
             temp.Size = this.ClientSize;
             temp.BackColor = Color.White;
             this.Controls.Add(temp);
@@ -76,6 +76,7 @@ namespace Drawing_App
             toolbox.AddTool(new SquareTool());
             toolbox.AddTool(new CircleTool());
             toolbox.AddTool(new ColorTool());
+            toolbox.AddTool(new DetectColorTool());
             ToolStrip temp = (ToolStrip)toolbox;
             temp.Location = new Point(0, 0);
             temp.Anchor = AnchorStyles.Left;
@@ -83,18 +84,14 @@ namespace Drawing_App
             this.Controls.Add(temp);
             System.Console.WriteLine("Toolbox Successfully Initialized");
         }
-        /*private void InitializeButton()
+        /*private void InitializeColor()
         {
-            // Create and initialize a Button.
-            Button button1 = new Button();
-            button1.Location = new Point(0, 25);
-            // Set the button to return a value of OK when clicked.
-            button1.DialogResult = DialogResult.OK;
-
-            // Add the button to the form.
-            Controls.Add(button1);
+            this.colorPick = new ColorPicker();
+            Console.WriteLine(colorPick.GetColor);
         }*/
+
         ICanvas canvas;
         IToolbox toolbox;
+        IColorPick colorPick;
     }
 }

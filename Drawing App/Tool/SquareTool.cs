@@ -16,7 +16,6 @@ namespace Drawing_App.Tool
         Square square;
 
         public ICanvas TargetCanvas { get { return this.canvas; } set { this.canvas = value; } }
-
         public SquareTool()
         {
             this.Name = "Square Tool";

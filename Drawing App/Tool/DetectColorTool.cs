@@ -6,33 +6,26 @@ using System.Windows.Forms;
 using Drawing_App.Interface;
 namespace Drawing_App.Tool
 {
-    public class ColorTool:ToolStripButton,ITool
+    public class DetectColorTool : ToolStripButton, ITool
     {
         ICanvas canvas;
-        IColorPick colorPick;
-        ColorPicker cp;
-        IDrawingObject obj;
-        public IDrawingObject activeObj { get { return this.obj; } set { this.obj = value; } }
         public ICanvas TargetCanvas { get { return this.canvas; } set { this.canvas = value; } }
-        public ColorTool()
+        public DetectColorTool()
         {
             this.Name = "Color Tool";
-            this.Text = "Color";
+            this.Text = "Detect";
             this.CheckOnClick = true;
-            this.cp = new ColorPicker();
+            
         }
 
         public void OnMouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                Console.WriteLine(cp.GetColor);
-                cp.ShowDialogBox();
-                Console.WriteLine(cp.GetColor);
-                /*Console.WriteLine(colorPick);
-                colorPick.ShowDialogBox();*/
+                Console.WriteLine("debug");
+                
             }
-            
+
         }
 
         public void OnMouseUp(object sender, MouseEventArgs e)
@@ -57,8 +50,8 @@ namespace Drawing_App.Tool
         {
             base.OnClick(e);
             this.canvas.ActiveTool = this;
-            //this.obj.ActiveColor = this.colorPick;
             //this.canvas.DeselectAllObject();
         }
+
     }
 }

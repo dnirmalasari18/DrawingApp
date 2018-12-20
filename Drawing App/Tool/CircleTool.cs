@@ -14,9 +14,7 @@ namespace Drawing_App.Tool
     {
         ICanvas canvas;
         Circle circle;
-
         public ICanvas TargetCanvas { get { return this.canvas; } set { this.canvas = value; } }
-
         public CircleTool()
         {
             this.Name = "Circle Tool";

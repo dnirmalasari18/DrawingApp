@@ -7,7 +7,7 @@ using System.Drawing;
 using Drawing_App.Interface;
 namespace Drawing_App
 {
-    class ColorPicker : IColorPick
+    public class ColorPicker : IColorPick
     {
         ColorDialog cd = new ColorDialog();
         Color colorPicked;// = Color.Black;
@@ -15,16 +15,26 @@ namespace Drawing_App
         public ColorPicker()
         {
             //this.showDialogBox();
-            this.colorPicked = Color.Black;
+            this.colorPicked = Color.Crimson;
+            //Console.WriteLine("buat baruu");
         }
 
-        public void showDialogBox()
+        public void ShowDialogBox()
         {
             //cd.ShowDialog();
             if (cd.ShowDialog() == DialogResult.OK)
             {
                 colorPicked = cd.Color;
             }
+        }
+
+        public Color Hehehe()
+        {
+            if (cd.ShowDialog() == DialogResult.OK)
+            {
+                colorPicked = cd.Color;
+            }
+            return this.colorPicked;
         }
 
     }

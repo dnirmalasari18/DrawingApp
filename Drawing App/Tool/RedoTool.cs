@@ -11,7 +11,6 @@ namespace Drawing_App.Tool
         ICanvas canvas;
 
         public ICanvas TargetCanvas { get { return this.canvas; } set { this.canvas = value; } }
-
         public RedoTool()
         {
             this.Name = "Undo Tool";

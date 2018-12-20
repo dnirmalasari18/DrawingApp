@@ -67,6 +67,9 @@
     <Compile Include="Tool\ColorTool.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Tool\DetectColorTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Tool\LineConnectorTool.cs">
       <SubType>Component</SubType>
     </Compile>
