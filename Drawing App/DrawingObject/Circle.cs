@@ -25,23 +25,18 @@ namespace Drawing_App.DrawingObject
         string name="Circle";
         public string ObjName { get { return this.name; }  }
         
-        //Color colorPen;
-        //IColorPick ActiveColor { get { return this.colorPen; } set { this.colorPen = value; } }
+        Color color;
+        public Color ActiveColor { get { return this.color; } set { this.color = value; } }
         public Circle()
         {   
             this.currentState = PrevState.GetInstance();
             this.component = new List<IDrawingObject>();
             this.pen = new Pen(Color.Black);
+            this.color = Color.White;
         }
 
-        /*public void ActiveColor()
-        {
-            colorPen = colorPick.GetColor;
-            Console.WriteLine(colorPen);
-        }*/
         public void Draw()
         {
-            this.currentState.Draw(this);
             this.currentState.Draw(this);
             foreach (IDrawingObject obj in this.component)
             {
@@ -131,14 +126,14 @@ namespace Drawing_App.DrawingObject
         {
             pen.Color = Color.Black;
             Console.WriteLine(pen.Color);
-            pen.Width = 3f;
+            pen.Width = 1.5f;
             pen.DashStyle = DashStyle.Solid;
             int x = this.From.X, y = this.From.Y;
             if (this.From.X > this.To.X) x = this.To.X;
             if (this.From.Y > this.To.Y) y = this.To.Y;
             if (this.graph != null)
             {
-                SolidBrush solidBrush = new SolidBrush(Color.White);
+                SolidBrush solidBrush = new SolidBrush(this.color);
                 GraphicsPath grapPath = new GraphicsPath();
                 Rectangle rectangle = new Rectangle(x, y, Math.Abs(this.start.X - this.end.X), Math.Abs(this.start.Y - this.end.Y));
                 grapPath.AddEllipse(rectangle);
@@ -158,7 +153,7 @@ namespace Drawing_App.DrawingObject
             if (this.From.Y > this.To.Y) y = this.To.Y;
             if (this.graph != null)
             {
-                SolidBrush solidBrush = new SolidBrush(Color.White);
+                SolidBrush solidBrush = new SolidBrush(this.color);
                 GraphicsPath grapPath = new GraphicsPath();
                 Rectangle rectangle = new Rectangle(x, y, Math.Abs(this.start.X - this.end.X), Math.Abs(this.start.Y - this.end.Y));
                 grapPath.AddEllipse(rectangle);

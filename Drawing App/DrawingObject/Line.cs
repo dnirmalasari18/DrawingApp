@@ -23,7 +23,8 @@ namespace Drawing_App.DrawingObject
         public Point To { get { return this.end; } set { this.end = value; } }
         
         public Graphics TargetGraphic { set { this.graph = value; } }
-
+        Color colorPen;
+        public Color ActiveColor { get { return this.colorPen; } set { this.colorPen = value; } }
         public Line()
         {
             this.currentState = PrevState.GetInstance();

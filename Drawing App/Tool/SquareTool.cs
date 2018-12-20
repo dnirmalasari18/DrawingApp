@@ -14,13 +14,14 @@ namespace Drawing_App.Tool
     {
         ICanvas canvas;
         Square square;
-
+        ColorPicker cp;
         public ICanvas TargetCanvas { get { return this.canvas; } set { this.canvas = value; } }
         public SquareTool()
         {
             this.Name = "Square Tool";
             this.Text = "Square";
             this.CheckOnClick = true;
+            this.cp = ColorPicker.GetInstance();
         }
 
         public void OnMouseDown(object sender, MouseEventArgs e)
@@ -33,6 +34,7 @@ namespace Drawing_App.Tool
                     To = e.Location
                 };
                 this.canvas.AddDrawingObject(square);
+                square.ActiveColor = cp.GetColor;
             }
         }
 

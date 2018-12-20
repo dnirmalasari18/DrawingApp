@@ -9,6 +9,5 @@ namespace Drawing_App.Interface
     {
         void ShowDialogBox();
         Color GetColor { get; }
-        Color Hehehe();
     }
 }

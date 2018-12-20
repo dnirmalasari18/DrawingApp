@@ -14,12 +14,14 @@ namespace Drawing_App.Tool
     {
         ICanvas canvas;
         Circle circle;
+        ColorPicker cp;
         public ICanvas TargetCanvas { get { return this.canvas; } set { this.canvas = value; } }
         public CircleTool()
         {
             this.Name = "Circle Tool";
             this.Text = "Circle";
             this.CheckOnClick = true;
+            this.cp = ColorPicker.GetInstance();
         }
 
         public void OnMouseDown(object sender, MouseEventArgs e)
@@ -31,7 +33,8 @@ namespace Drawing_App.Tool
                     From = e.Location,
                     To = e.Location
                 };
-               this.canvas.AddDrawingObject(circle);
+                this.canvas.AddDrawingObject(circle);
+                circle.ActiveColor = cp.GetColor;
             }
         }
 

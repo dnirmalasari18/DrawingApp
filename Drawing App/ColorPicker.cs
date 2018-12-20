@@ -12,29 +12,23 @@ namespace Drawing_App
         ColorDialog cd = new ColorDialog();
         Color colorPicked;// = Color.Black;
         public Color GetColor { get { return this.colorPicked; } }
-        public ColorPicker()
+        private static ColorPicker Instance;
+        public static ColorPicker GetInstance()
         {
-            //this.showDialogBox();
-            this.colorPicked = Color.Crimson;
-            //Console.WriteLine("buat baruu");
+            if (Instance == null) Instance = new ColorPicker();
+            return Instance;
+        }
+        private ColorPicker()
+        {
+            //this.colorPicked = Color.Crimson;
         }
 
         public void ShowDialogBox()
         {
-            //cd.ShowDialog();
             if (cd.ShowDialog() == DialogResult.OK)
             {
                 colorPicked = cd.Color;
             }
-        }
-
-        public Color Hehehe()
-        {
-            if (cd.ShowDialog() == DialogResult.OK)
-            {
-                colorPicked = cd.Color;
-            }
-            return this.colorPicked;
         }
 
     }

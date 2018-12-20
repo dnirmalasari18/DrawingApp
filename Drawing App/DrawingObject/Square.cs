@@ -15,6 +15,7 @@ namespace Drawing_App.DrawingObject
         public event EventHandler LocationChanged;
         IState currentState;
         Graphics graph;
+        Color color;
         List<IDrawingObject> component;
         List<ControlPoint> controlPoint;
         public Point From { get { return this.start; } set { this.start = value; } }
@@ -22,11 +23,15 @@ namespace Drawing_App.DrawingObject
 
         public Graphics TargetGraphic { set { this.graph = value; } }
         public string ObjName { get { return "Square"; } }
+
+        public Color ActiveColor { get => this.color; set => this.color = value; }
+
         public Square()
         {
             this.currentState = PrevState.GetInstance();
             this.pen = new Pen(Color.Black);
             this.component = new List<IDrawingObject>();
+            this.color = Color.White;
         }
         public void Draw()
         {
@@ -126,7 +131,7 @@ namespace Drawing_App.DrawingObject
             if (this.From.Y > this.To.Y) y = this.To.Y;
             if (this.graph != null)
             {
-                SolidBrush solidBrush = new SolidBrush(Color.White);
+                SolidBrush solidBrush = new SolidBrush(this.color);
                 GraphicsPath grapPath = new GraphicsPath();
                 Rectangle rectangle = new Rectangle(x, y, Math.Abs(this.start.X - this.end.X), Math.Abs(this.start.Y - this.end.Y));
                 grapPath.AddRectangle(rectangle);
@@ -146,7 +151,7 @@ namespace Drawing_App.DrawingObject
             if (this.From.Y > this.To.Y) y = this.To.Y;
             if (this.graph != null)
             {
-                SolidBrush solidBrush = new SolidBrush(Color.White);
+                SolidBrush solidBrush = new SolidBrush(this.color);
                 GraphicsPath grapPath = new GraphicsPath();
                 Rectangle rectangle = new Rectangle(x, y, Math.Abs(this.start.X - this.end.X), Math.Abs(this.start.Y - this.end.Y));
                 grapPath.AddRectangle(rectangle);
