@@ -23,10 +23,7 @@ namespace Drawing_App.Tool
 
         public void OnMouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                
-            }
+
             
         }
 
@@ -51,7 +48,6 @@ namespace Drawing_App.Tool
         protected override void OnClick(EventArgs e)
         {
             base.OnClick(e);
-            //this.canvas.ActiveTool = this;
             cp.ShowDialogBox();
             this.canvas.DeselectAllObject();
         }
