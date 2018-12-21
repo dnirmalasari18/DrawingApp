@@ -28,8 +28,10 @@ namespace Drawing_App.Tool
                 IDrawingObject obj = this.canvas.SelectObjectAt(e.Location);
                 if (obj != null)
                 {
+                    
                     obj.ActiveColor = cp.GetColor;
                 }
+                
             }
             
         }
@@ -55,7 +57,7 @@ namespace Drawing_App.Tool
         protected override void OnClick(EventArgs e)
         {
             base.OnClick(e);
-            this.canvas.ActiveTool = this;
+            //this.canvas.ActiveTool = this;
             cp.ShowDialogBox();
             this.canvas.DeselectAllObject();
         }

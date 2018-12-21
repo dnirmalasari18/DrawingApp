@@ -125,7 +125,6 @@ namespace Drawing_App.DrawingObject
         public void RenderOnStatic()
         {
             pen.Color = Color.Black;
-            Console.WriteLine(pen.Color);
             pen.Width = 1.5f;
             pen.DashStyle = DashStyle.Solid;
             int x = this.From.X, y = this.From.Y;

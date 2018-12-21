@@ -12,6 +12,7 @@ namespace Drawing_App
         ColorDialog cd = new ColorDialog();
         Color colorPicked;// = Color.Black;
         public Color GetColor { get { return this.colorPicked; } }
+        public Color ActiveColor { get { return this.colorPicked; } set { this.colorPicked = value; } }
         private static ColorPicker Instance;
         public static ColorPicker GetInstance()
         {
@@ -28,6 +29,7 @@ namespace Drawing_App
             if (cd.ShowDialog() == DialogResult.OK)
             {
                 colorPicked = cd.Color;
+                Console.WriteLine("Choosing color:" + colorPicked);
             }
         }
 
