@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using Drawing_App.Interface;
 using System.Drawing;
+
 namespace Drawing_App.Tool
 {
     public class DetectColorTool : ToolStripButton, ITool
@@ -14,18 +15,14 @@ namespace Drawing_App.Tool
         ColorPicker cp;
         public ICanvas TargetCanvas { get { return this.canvas; } set { this.canvas = value; } }
 
-
         public DetectColorTool()
         {
             this.Name = "DetectColor Tool";
             this.Text = "Detect";
             this.CheckOnClick = true;
             this.cp = ColorPicker.GetInstance();
-            
         }
-
-
-
+        
         public void OnMouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
