@@ -14,14 +14,6 @@ namespace Drawing_App.Tool
         ColorPicker cp;
         public ICanvas TargetCanvas { get { return this.canvas; } set { this.canvas = value; } }
 
-        [DllImport("gdi32")]
-        public static extern uint GetPixel(IntPtr hDC, int XPos,int YPos);
-
-        /*[DllImport("user32.dll", CharSet = CharSet.Auto)]
-        public static extern bool GetCursorPos(out Point pt);*/
-
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
-        public static extern IntPtr GetWindowDC(IntPtr hWnd);
 
         public DetectColorTool()
         {
@@ -31,31 +23,13 @@ namespace Drawing_App.Tool
             this.cp = ColorPicker.GetInstance();
             
         }
-        public void Get(Point pos)
-        {
-            /*IntPtr dc = GetWindowDC(IntPtr.Zero);
 
-
-            long color = GetPixel(dc, pos.X, pos.Y);
-            Color cc = Color.FromArgb((int)color);
-            
-            Console.WriteLine("Detecting color:" + cc);*/
-            /*IDrawingObject obj = this.canvas.SelectObjectAt(pos);
-            if (obj != null)
-            {
-                Color cc = obj.ActiveColor;
-                return cc;
-            }
-            return null;*/
-        }
 
 
         public void OnMouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                /*Color col = this.Get(e.Location);
-                this.cp.ActiveColor = col;*/
                 IDrawingObject obj = this.canvas.SelectObjectAt(e.Location);
                 if (obj != null)
                 {

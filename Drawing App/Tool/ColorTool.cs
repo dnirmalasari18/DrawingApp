@@ -57,7 +57,7 @@ namespace Drawing_App.Tool
         protected override void OnClick(EventArgs e)
         {
             base.OnClick(e);
-            //this.canvas.ActiveTool = this;
+            this.canvas.ActiveTool = this;
             cp.ShowDialogBox();
             this.canvas.DeselectAllObject();
         }
